@@ -1,0 +1,1 @@
+http://localhost:82/SQLCourse_PHP/hello.php
