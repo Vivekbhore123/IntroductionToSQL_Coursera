@@ -1,0 +1,12 @@
+CREATE TABLE `ages` (
+  `name` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `ages` (`name`, `age`) VALUES
+('Mira', 17),
+('Krystal', 23),
+('Susan', 26),
+('Cambell', 35),
+('Aleeyah', 19),
+('Leaya', 35);
