@@ -1,0 +1,82 @@
+DROP TABLE IF EXISTS Member;
+DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS Course;
+
+CREATE TABLE `User` (
+    user_id     INTEGER NOT NULL AUTO_INCREMENT,
+    name        VARCHAR(128) UNIQUE,
+    PRIMARY KEY(user_id)
+) ENGINE=InnoDB CHARACTER SET=utf8;
+
+CREATE TABLE Course (
+    course_id     INTEGER NOT NULL AUTO_INCREMENT,
+    title         VARCHAR(128) UNIQUE,
+    PRIMARY KEY(course_id)
+) ENGINE=InnoDB CHARACTER SET=utf8;
+
+CREATE TABLE Member (
+    user_id       INTEGER,
+    course_id     INTEGER,
+    role          INTEGER,
+
+    CONSTRAINT FOREIGN KEY (user_id) REFERENCES `User` (user_id)
+      ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FOREIGN KEY (course_id) REFERENCES Course (course_id)
+       ON DELETE CASCADE ON UPDATE CASCADE,
+
+    PRIMARY KEY (user_id, course_id)
+) ENGINE=InnoDB CHARACTER SET=utf8;
+
+INSERT INTO Course (course_id, title) VALUES (1, 'si106 ');
+INSERT INTO Course (course_id, title) VALUES (2, 'si110');
+INSERT INTO Course (course_id, title) VALUES (3, 'si206');
+
+INSERT INTO User (user_id, name) VALUES (1, 'Mary');
+INSERT INTO Member (user_id, course_id, role) VALUES (1, 1, 1);
+
+INSERT INTO User (user_id, name) VALUES (2, 'Brayden');
+INSERT INTO Member (user_id, course_id, role) VALUES (2, 1, 0);
+
+INSERT INTO User (user_id, name) VALUES (3, 'Elvita');
+INSERT INTO Member (user_id, course_id, role) VALUES (3, 1, 0);
+
+INSERT INTO User (user_id, name) VALUES (4, 'Israa');
+INSERT INTO Member (user_id, course_id, role) VALUES (4, 1, 0);
+
+INSERT INTO User (user_id, name) VALUES (5, 'Ruo');
+INSERT INTO Member (user_id, course_id, role) VALUES (5, 1, 0);
+
+INSERT INTO User (user_id, name) VALUES (6, 'Aayan');
+INSERT INTO Member (user_id, course_id, role) VALUES (6, 2, 1);
+
+INSERT INTO User (user_id, name) VALUES (7, 'Amani');
+INSERT INTO Member (user_id, course_id, role) VALUES (7, 2, 0);
+
+INSERT INTO User (user_id, name) VALUES (8, 'Likiesha');
+INSERT INTO Member (user_id, course_id, role) VALUES (8, 2, 0);
+
+INSERT INTO User (user_id, name) VALUES (9, 'Mahmoud');
+INSERT INTO Member (user_id, course_id, role) VALUES (9, 2, 0);
+
+INSERT INTO User (user_id, name) VALUES (10, 'Raine');
+INSERT INTO Member (user_id, course_id, role) VALUES (10, 2, 0);
+
+INSERT INTO User (user_id, name) VALUES (11, 'Ayleigh');
+INSERT INTO Member (user_id, course_id, role) VALUES (11, 3, 1);
+
+INSERT INTO User (user_id, name) VALUES (12, 'Aleksandrs');
+INSERT INTO Member (user_id, course_id, role) VALUES (12, 3, 0);
+
+INSERT INTO User (user_id, name) VALUES (13, 'Aymie');
+INSERT INTO Member (user_id, course_id, role) VALUES (13, 3, 0);
+
+INSERT INTO User (user_id, name) VALUES (14, 'Cody');
+INSERT INTO Member (user_id, course_id, role) VALUES (14, 3, 0);
+
+INSERT INTO User (user_id, name) VALUES (15, 'Ishwar');
+INSERT INTO Member (user_id, course_id, role) VALUES (15, 3, 0);
+
+SELECT User.name, Course.title, Member.role
+FROM User JOIN Member JOIN Course
+ON User.user_id = Member.user_id AND Member.course_id = Course.course_id
+ORDER BY Course.title, Member.role DESC, User.name;
